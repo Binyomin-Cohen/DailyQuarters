@@ -36,7 +36,7 @@
             date: new Date()
           });
         }
-    }
+    },
   }
 </script>
 

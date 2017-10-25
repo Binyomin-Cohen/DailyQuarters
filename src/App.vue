@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img width="300" height="300" src="../static/quarterpic.png"><br>
+    <div id="routeLinks">
+      <router-link to="makeQuarterEvent">Record Event</router-link>
+      <router-link to="getQuarterHistory">Get History</router-link>
+    </div>
     <router-view/>
   </div>
 </template>
@@ -31,4 +35,9 @@
   color: #2c3e50;
   margin-top: 60px;
 }
+  #routeLinks{
+    margin: 15px;
+    padding: 15px;
+    border: 1px solid grey;
+  }
 </style>

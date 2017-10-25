@@ -10,8 +10,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: HelloWorld
+      name: 'history',
+      component: QuarterHistory
     },
     {
       path: '/makeQuarterEvent',
