@@ -1,13 +1,25 @@
 <template>
   <div class="hello">
-    <select v-model="kid">
-      <option value="Shmuel">Shmuel</option>
-      <option value="Leah-Bracha">Leah Bracha</option>
-      <option value="Aharon-Noam">Aharon Noam</option>
-    </select>
-    <input v-model="amount" type="number">
-    <input v-model="reason" type="text">
-    <button v-on:click="createEvent">Make Event</button>
+    <form v-on:submit.prevent>
+      <div class="form-group">
+        <label for="kid">Kid:</label>
+        <select v-model="kid" id="kid" class="form-control">
+          <option value="Shmuel">Shmuel</option>
+          <option value="Leah-Bracha">Leah Bracha</option>
+          <option value="Aharon-Noam">Aharon Noam</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="amount">Quarter Amount</label>
+        <input v-model="amount" id="amount" type="number" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="reason">Reason</label>
+        <input type="text" class="form-control" id="reason" v-model="reason">
+      </div>
+      <button v-on:click="createEvent" class="btn btn-default">Make Event</button>
+    </form>
+
   </div>
 </template>
 
@@ -42,5 +54,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  label, select, input{
+    width: 300px;
+    max-width: 100%;
+    margin: auto;
+  }
 </style>

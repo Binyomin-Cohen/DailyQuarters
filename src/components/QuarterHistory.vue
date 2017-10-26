@@ -1,14 +1,17 @@
 <template>
   <div class="hello">
-    <select v-model="kid">
-      <option value="Shmuel">Shmuel</option>
-      <option value="Leah-Bracha">Leah Bracha</option>
-      <option value="Aharon-Noam">Aharon Noam</option>
-    </select>
+    <div id="kidChooser">
+      <label for="historyKid">Choose Kid</label>
+      <select v-model="kid" id="historyKid">
+        <option value="Shmuel">Shmuel</option>
+        <option value="Leah-Bracha">Leah Bracha</option>
+        <option value="Aharon-Noam">Aharon Noam</option>
+      </select>
+    </div>
     <h1>{{kid}}</h1>
     <h2>Current Total: {{total}}</h2>
     <table class="table table-striped">
-      <tr class="table-success"><th>difference</th><th>reason</th><th>kid</th></tr>
+      <tr class="table-warning"><th>difference</th><th>reason</th><th>kid</th></tr>
       <tr v-for="qEvent in quarterEvents">
         <td>{{qEvent.amount}}</td><td>{{qEvent.reason}}</td><td>{{qEvent.kid}}</td>
       </tr>
@@ -42,13 +45,14 @@
           }
           console.log(eventsArray);
           theComponent.quarterEvents = eventsArray;
-          var beginDate = new Date();
+          var beginDate = new Date("Thu May 25 2017");
           theComponent.total = theComponent.calculateTotal(beginDate, eventsArray);
         });
       },
       calculateTotal: function(dateToBeginWith, eventsArray){
           var beginDate = new Date(dateToBeginWith);
-          var daysDifference  = (new Date() - beginDate) / 1000 / 60/ 60 / 24 /4; // 10000 milliseconds, 60 seconds, 60 minutes, 24 hours
+          var daysDifference  = Math.floor((new Date() - beginDate) / 1000 / 60/ 60 / 24) ; // 10000 milliseconds, 60 seconds, 60 minutes, 24 hours
+          console.log('days difference:    ' + daysDifference)
           var totalFromEvents = 0;
           for(var i = 0; i < eventsArray.length; i++){
               totalFromEvents += Number(eventsArray[i].amount);
@@ -68,5 +72,12 @@
 <style scoped>
   td {
     padding: 10px;
+  }
+  #kidChooser{
+    background-color: #FFE0B2;
+    width: 250px;
+    padding: 15px;
+    margin: auto;
+    margin-bottom: 30px;
   }
 </style>
