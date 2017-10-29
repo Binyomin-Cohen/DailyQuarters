@@ -13,7 +13,7 @@
     <table class="table table-striped">
       <tr class="table-warning"><th>difference</th><th>reason</th><th>kid</th></tr>
       <tr v-for="qEvent in quarterEvents">
-        <td>{{qEvent.amount}}</td><td>{{qEvent.reason}}</td><td>{{qEvent.kid}}</td>
+        <td>{{qEvent.amount}}</td><td>{{qEvent.reason}}</td><td>{{qEvent.kid}}</td><td><button v-on:click="deleteEvent(qEvent.theKey)">delete</button></td>
       </tr>
     </table>
   </div>
@@ -41,7 +41,9 @@
           console.log(snapKeys);
           var eventsArray = [];
           for(var i = 0; i < snapKeys.length; i++){
-              eventsArray.push(snapVal[snapKeys[i]]);
+              var singleEvent = snapVal[snapKeys[i]];
+              singleEvent.theKey = snapKeys[i];
+              eventsArray.push(singleEvent);
           }
           console.log(eventsArray);
           theComponent.quarterEvents = eventsArray;
@@ -58,6 +60,11 @@
               totalFromEvents += Number(eventsArray[i].amount);
           }
           return daysDifference + totalFromEvents;
+      },
+      deleteEvent(eventId){
+        var theComponent = this;
+        firebase.database().ref('/events/' + theComponent.kid + '/' + eventId).set(null);
+        theComponent.getHistory();
       }
     },
     watch: {
